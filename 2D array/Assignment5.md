@@ -325,6 +325,23 @@ Other original arrays could be [4,3,1] or [3,1,4].
 Solution:
 
 ```
-
+var findOriginalArray = function(changed) {
+    if (changed.length % 2 != 0) return [] //if array length is odd, changed is not a doubled array
+    changed.sort((a,b)=>a-b) //sort array in ascending order
+    ans=[]
+    for (let i = 0; i< changed.length; i++){
+        if (changed[i]>-1){  //check if element isn't marked as doubled
+            //let doubleIndex = changed.lastIndexOf(changed[i]*2) //find last index of doubled, ends up with TLE
+			let doubleIndex = changed.indexOf(changed[i]*2, i+1) //find next index of doubled, doesn't end up with TLE
+            if (doubleIndex>i) {      
+                ans.push(changed[i]) //add element to ans if doubled found
+                changed[doubleIndex] = -1 //mark element as double
+            } else {
+                return [] //if doubled not found, changed is not a doubled array
+            }
+        }
+    }
+    return ans
+};
 
 ```

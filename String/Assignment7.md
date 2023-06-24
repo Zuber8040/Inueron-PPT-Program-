@@ -184,11 +184,47 @@ If there are fewer than k characters left, reverse all of them. If there are les
 Solution:
 
 ```
+var reverseStr = function (s, k, arr = s.split(""), k2 = k * 2) {
+  for (let i = 0; i < arr.length - 1; i += k2) {
+    swap(i, Math.min(i + k - 1, arr.length - 1));
+  }
+  return arr.join("");
 
+  function swap(start, end) {
+    while (start < end) {
+      [arr[start], arr[end]] = [arr[end], arr[start]];
+      start++;
+      end--;
+    }
+  }
+};
 
 ```
+Question 6
+Given two strings s and goal, return true *if and only if* s *can become* goal *after some number of **shifts** on* s.
 
+A **shift** on s consists of moving the leftmost character of s to the rightmost position.
 
+- For example, if s = "abcde", then it will be "bcdea" after one shift.
 
+**Example 1:**
+
+**Input:** s = "abcde", goal = "cdeab"
+
+**Output:**
+
+true
+
+```
+/**
+ * @param {string} s
+ * @param {string} goal
+ * @return {boolean}
+ */
+var rotateString = function(s, goal) {
+    if (s.length !== goal.length) return false;
+    return s.concat(s).includes(goal);
+};
+```
 
 

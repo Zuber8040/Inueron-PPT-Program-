@@ -228,3 +228,76 @@ var rotateString = function(s, goal) {
 ```
 
 
+**Question 7**
+
+Given two strings s and t, return true *if they are equal when both are typed into empty text editors*. '#' means a backspace character.
+
+Note that after backspacing an empty text, the text will continue empty.
+
+**Example 1:**
+
+**Input:** s = "ab#c", t = "ad#c"
+
+**Output:** true
+
+**Explanation:**
+
+Both s and t become "ac".
+
+Solution
+
+```
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
+ function check(str){
+     let res = '';
+     let backspace =0;
+     for(let i=str.length-1;i>=0;i-=1){
+         if(str[i]==='#')backspace+=1;
+         else if(backspace>0)backspace-=1;
+         else res =str[i]+res;
+     }
+     return res;
+ }
+var backspaceCompare = function(s, t) {
+    return check(s)===check(t);
+
+};
+
+\\ TC: O(N)
+\\ SC:O(1)
+```
+
+
+💡 **Question 8**
+
+You are given an array coordinates, coordinates[i] = [x, y], where [x, y] represents the coordinate of a point. Check if these points make a straight line in the XY plane.
+
+**Example 1:**
+
+**Input:** coordinates = [[1,2],[2,3],[3,4],[4,5],[5,6],[6,7]]
+
+**Output:** true
+
+Solution
+
+```
+/**
+ * @param {number[][]} coordinates
+ * @return {boolean}
+ */
+var checkStraightLine = function(coordinates) {
+    let a = coordinates[1][1] - coordinates[0][1];
+    let b = coordinates[1][0] - coordinates[0][0];
+    return coordinates.every(
+        item =>
+            a * (item[0] - coordinates[0][0]) -
+                b * (item[1] - coordinates[0][1]) ===
+            0
+    );
+};
+
+```
